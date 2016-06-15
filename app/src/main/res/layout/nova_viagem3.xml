@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e28da7"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#015488"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/nova_viagem"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="@string/destino"
+                android:textAppearance="@android:style/TextAppearance.Holo.Medium"  />
+
+            <EditText
+                android:id="@+id/destino"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="@string/tipo_da_viagem"
+                android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+            <RadioGroup
+                android:id="@+id/tipoViagem"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/lazer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lazer"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+                <RadioButton
+                    android:id="@+id/negocios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/negocios"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+            </RadioGroup>
+
+            <TableRow
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="@string/data_da_chegada"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="@string/data_da_saida"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/dataChegada"
+                    android:onClick="selecionarData"
+                    android:text="@string/selecione" />
+
+                <Button
+                    android:id="@+id/dataSaida"
+                    android:onClick="selecionarData"
+                    android:text="@string/selecione" />
+            </TableRow>
+
+            <TextView
+
+                android:text="@string/orcamento"
+                android:textAppearance="@android:style/TextAppearance.Holo.Medium"  />
+            <EditText
+                android:id="@+id/orcamento"
+                android:inputType="numberDecimal"/>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/quantidade_de_pessoas"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Medium" />
+
+                <EditText
+                    android:id="@+id/quantidadeDePessoas"
+                    android:inputType="number"/>
+
+            </TableRow>
+
+            <Button
+
+                android:onClick="salvarViagem"
+                android:text="@string/salvar"
+                android:layout_marginTop="50dp" />
+
+
+        </TableLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
+
+

@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Boa Viagem</string>
+    <string name="usuario">Login</string>
+    <string name="erro_autenticacao">Usuário inválido</string>
+    <string name="novo_gasto">Novo Gasto</string>
+    <string name="nova_viagem">Nova Viagem</string>
+    <string name="minhas_viagens">Minhas Viagens</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="destino">Destino</string>
+    <string name="lazer">Lazer</string>
+    <string name="negocios">Negócios</string>
+    <string name="tipo_da_viagem">Tipo da viagem</string>
+    <string name="data_da_chegada">Data de chegada</string>
+    <string name="data_da_saida">Data de saída</string>
+    <string name="selecione">Selecione</string>
+    <string name="orcamento">Orçamento</string>
+    <string name="quantidade_de_pessoas">Quantidade de pessoas</string>
+    <string name="salvar">Salvar</string>
+    <string name="data">Data</string>
+    <string name="descricao">Descrição</string>
+    <string name="local">Local</string>
+    <string name="valor">Valor</string>
+    <string name="gastei">Gastei!</string>
+    <string name="categoria">Categoria do gasto</string>
+    <string name="sair">Sair</string>
+    <string name="remover_viagem">Remover viagem</string>
+    <string name="lista_gastos">Lista de gastos</string>
+    <string name="remover">Remover</string>
+    <string name="gastos_realizados">Gasto realizados</string>
+    <string name="editar">Editar</string>
+    <string name="opcoes">Opções</string>
+    <string name="visualizar">Visualizar</string>
+    <string name="confirmacao_exclusao_viagem">Excluir essa viagem?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="modo_viagem_sumario">Sumário Modo viagem</string>
+    <string name="modo_viagem">Modo Viagem</string>
+    <string name="informe_valor_limite">Informe o valor limite</string>
+    <string name="valor_limite_gasto">Valor do limite gasto</string>
+    <string name="valor_limite">Valor limite</string>
+    <string name="manter_conectado">Manter conectado</string>
+    <string name="registro_realizado">Registro realizado!</string>
+    <string name="erro_salvar">:( Algum erro ao salvar</string>
+
+
+    <string-array name="categoria_gasto">
+        <item>Alimentação</item>
+        <item>Combustível</item>
+        <item>Transporte</item>
+        <item>Hospedagem</item>
+        <item>Outros</item>
+    </string-array>
+</resources>
