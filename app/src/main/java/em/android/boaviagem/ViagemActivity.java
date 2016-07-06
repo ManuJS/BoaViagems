@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.app.DatePickerDialog.OnDateSetListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +36,7 @@ public class ViagemActivity extends Activity {
     private RadioGroup radioGroup;
     private Button dataChegadaButton, dataSaidaButton;
     private Date dataChegada, dataSaida;
+    private String id;
 
 
     @Override
@@ -46,6 +49,7 @@ public class ViagemActivity extends Activity {
         ano = calendar.get(Calendar.YEAR);
         mes = calendar.get(Calendar.MONTH);
         dia = calendar.get(Calendar.DAY_OF_MONTH);
+
 
         dataChegadaButton = (Button) findViewById(R.id.dataChegada);
         //dataChegadaButton.setText(dia + "/" + (mes + 1) + "/" + ano);
@@ -60,6 +64,36 @@ public class ViagemActivity extends Activity {
 
         //acesso ao banco - TEM QUE ALTERAR O METODO CONSTRUTOR DE DATABASEHELPERcmd
         helper = new DatabaseHelper(this);
+
+        id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+        if (id != null){
+            prepararEdicao();
+        }
+
+    }
+
+    private void prepararEdicao() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor =
+                db.rawQuery("SELECT tipo_viagem, destino, data_chegada, " +
+                        "data_saida, quantidadeDePessoas, orcamento " +
+                        "FROM VIAGEM WHERE _ID = ?", new String[]{id});
+        cursor.moveToFirst();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        if (cursor.getInt(0) ==  Constantes.VIAGEM_LAZER){
+            radioGroup.check(R.id.lazer);
+        }else{
+            radioGroup.check(R.id.negocios);
+        }
+        destino.setText(cursor.getString(1));
+        dataChegada = new Date(cursor.getLong(2));
+        dataSaida = new Date(cursor.getLong(3));
+        dataChegadaButton.setText(dateFormat.format(dataChegada));
+        dataSaidaButton.setText("XX/XX/YYYY");
+        quantidadeDePessoas.setText(cursor.getString(4));
+        orcamento.setText(cursor.getString(5));
+        cursor.close();
 
     }
 
@@ -111,6 +145,7 @@ public class ViagemActivity extends Activity {
 
     public void salvarViagem(View v){
 
+//aqui eu pego os dados da view pra por no banco
         String destinos = destino.getText().toString();
         long dataC = dataChegada.getTime();
         long dataS = dataSaida.getTime();
@@ -118,9 +153,6 @@ public class ViagemActivity extends Activity {
         String qtdp = quantidadeDePessoas.getText().toString();
         int vl =  Constantes.VIAGEM_LAZER;
         int vn = Constantes.VIAGEM_NEGOCIOS;
-
-
-
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -141,7 +173,14 @@ public class ViagemActivity extends Activity {
             values.put("tipo_viagem", vn);
         }
 
-        long resultado = db.insert("viagem", null, values);
+        long resultado;
+
+        if (id == null){
+           resultado = db.insert("viagem", null, values);
+        }else{
+            resultado = db.update("viagem", values, "_id = ?", new String[]{id});
+        }
+
 
         if (resultado != -1){
             Toast.makeText(this, getString(R.string.registro_realizado), Toast.LENGTH_SHORT).show();
