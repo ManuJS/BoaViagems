@@ -53,7 +53,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
         getListView().setOnItemClickListener(this);
         alertDialog = criarAlertDialog();
-       // dialogConfirmacao = criarDialogConfirmacao();
+        dialogConfirmacao = criarDialogConfirmacao();
 
 //        if (getIntent().hasExtra(Constantes.MODO_SELECIONAR_VIAGEM)) {
 //            modoSelecionarViagem =
@@ -65,6 +65,15 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
         new Task().execute((Void[]) null);
 
+    }
+
+    private AlertDialog criarDialogConfirmacao() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirmacao_exclusao_viagem);
+        builder.setPositiveButton(getString(R.string.sim), this);
+        builder.setNegativeButton(getString(R.string.nao), this);
+
+        return builder.create();
     }
 
     private AlertDialog criarAlertDialog() {
@@ -213,19 +222,32 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
             case 2:
                 startActivity(new Intent(this, GastoListActivity.class));
                 break;
-            case 3:
-//                dialogConfirmacao.show();
-//                break;
+
+            case 3: //confirmacao de exclusao
+                dialogConfirmacao.show();
+                break;
+
+            case DialogInterface.BUTTON_POSITIVE: //exclusao
+                viagens.remove(viagemSelecionada);
+                removerViagem(id);
+                getListView().invalidateViews();
+                break;
+
             case DialogInterface.BUTTON_NEGATIVE:
                 dialogConfirmacao.dismiss();
                 break;
 
-//                viagens.remove(this.viagemSelecionada);
-//                getListView().invalidateViews();
-//                break;
-            case 4:
-                startActivity(new Intent(this, GastoListActivity.class));
+
         }
+    }
+
+    private void removerViagem(String id) {
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String where [] = new String[]{id};
+        db.delete("gasto", "viagem_id = ?", where);
+        db.delete("viagem", "_id = ?", where);
+
     }
 
     @Override
