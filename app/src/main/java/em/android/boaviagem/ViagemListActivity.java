@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import em.android.boaviagem.DataBase.DatabaseHelper;
+import em.android.boaviagem.DataBase.DatabaseHelper.Viagem;
 
 /**
  * Created by Emanuelle Menali on 06/05/2016.
@@ -115,7 +116,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
     private List<Map<String, Object>> viagens;
 
 
-    private List<Map<String, Object>> listarViagens() {
+   private List<Map<String, Object>> listarViagens() {
 
 
         SQLiteDatabase db = helper.getReadableDatabase();

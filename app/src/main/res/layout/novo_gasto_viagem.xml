@@ -49,6 +49,12 @@
                     android:text="@string/categoria" />
 
                 <Spinner
+                    android:id="@+id/viagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/destino"></Spinner>
+
+                <Spinner
                     android:id="@+id/categoria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

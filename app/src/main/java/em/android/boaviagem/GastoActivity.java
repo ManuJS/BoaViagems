@@ -14,18 +14,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import em.android.boaviagem.DataBase.DatabaseHelper;
 
 /**
  * Created by Emanuelle Menali on 06/05/2016.
  */
 public class GastoActivity extends Activity {
 
+
+    private DatabaseHelper helper;
     private int ano, mes, dia;
     private Button dataGasto;
     private Spinner categoria;
+    private Spinner viagem;
     EditText valor;
-   // private String valor;
+
+    private List<String> listaViagens = new ArrayList<String>();
+    private String ListaViagem;
 
 
 
@@ -50,6 +59,23 @@ public class GastoActivity extends Activity {
 
         valor = (EditText) findViewById(R.id.valor);
       //  String valor = (vlr_gasto.getText().toString());
+
+
+        //Adicionando Nomes no ArrayList
+        listaViagens.add("João");
+        listaViagens.add("Maria");
+        listaViagens.add("José");
+        listaViagens.add("Paulo");
+        listaViagens.add("Adriana");
+
+        //Identifica o Spinner no layout
+        viagem = (Spinner) findViewById(R.id.viagem);
+        //Cria um ArrayAdapter usando um padrão de layout da classe R do android, passando o ArrayList nomes
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaViagens);
+        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        viagem.setAdapter(spinnerArrayAdapter);
+
     }
 
 

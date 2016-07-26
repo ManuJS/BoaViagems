@@ -34,8 +34,10 @@ public class ViagemActivity extends Activity {
     private int ano, mes, dia;
     private EditText  destino, quantidadeDePessoas, orcamento;
     private RadioGroup radioGroup;
-    private Button dataChegadaButton, dataSaidaButton;
-    private Date dataChegada, dataSaida;
+    private Button dataChegadaButton;
+    private Button dataSaidaButton;
+    private Date dataChegada;
+    private Date dataSaida;
     private String id;
 
 
@@ -54,7 +56,7 @@ public class ViagemActivity extends Activity {
         dataChegadaButton = (Button) findViewById(R.id.dataChegada);
         //dataChegadaButton.setText(dia + "/" + (mes + 1) + "/" + ano);
 
-        //dataSaidaButton = (Button) findViewById(R.id.dataSaida);
+        dataSaidaButton = (Button) findViewById(R.id.dataSaida);
 
 
         destino = (EditText) findViewById(R.id.destino);
@@ -90,7 +92,9 @@ public class ViagemActivity extends Activity {
         dataChegada = new Date(cursor.getLong(2));
         dataSaida = new Date(cursor.getLong(3));
         dataChegadaButton.setText(dateFormat.format(dataChegada));
-        dataSaidaButton.setText("XX/XX/YYYY");
+       //arrumar esse botao.
+        //
+        dataSaidaButton.setText(dateFormat.format(dataSaida));
         quantidadeDePessoas.setText(cursor.getString(4));
         orcamento.setText(cursor.getString(5));
         cursor.close();
@@ -112,7 +116,7 @@ public class ViagemActivity extends Activity {
         public void onDateSet(DatePicker view,int anoSelecionado, int mesSelecionado, int diaSelecionado) {
             dataSaida = criarData(anoSelecionado, mesSelecionado, diaSelecionado);
             //elemento declarado dentro do metodo
-            dataSaidaButton = (Button) findViewById(R.id.dataSaida);
+            //dataSaidaButton = (Button) findViewById(R.id.dataSaida);
             dataSaidaButton.setText(diaSelecionado + "/" + (mesSelecionado+1) + "/" + anoSelecionado);
 
         }
@@ -191,6 +195,12 @@ public class ViagemActivity extends Activity {
         startActivity(new Intent(this, DashboardActivity.class));
     }
 
+    private void removerViagem (String id){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String where [] = new String[]{id};
+        //db.delete("GASTO", "VIAGEM_ID = ?", where);
+        db.delete("VIAGEM", "ID = ?", where);
+    }
 
 
     public void selecionarOpcao(View v) {

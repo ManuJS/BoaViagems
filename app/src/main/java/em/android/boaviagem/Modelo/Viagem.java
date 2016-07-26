@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Emanuelle Menali on 07/07/2016.
  */
 public class Viagem {
-    private Long id;
+    private Integer id;
     private String destino;
     private Integer tipoViagem;
     private Date dataChegada;
@@ -16,7 +16,7 @@ public class Viagem {
 
     public Viagem(){}
 
-    public Viagem(Long id, String destino, Integer tipoViagem, Date dataChegada, Date dataSaida, double orcamento, Integer quantidadeDePessoas){
+    public Viagem(int id, String destino, Integer tipoViagem, Date dataChegada, Date dataSaida, double orcamento, Integer quantidadeDePessoas){
         this.id = id;
         this.destino = destino;
         this.tipoViagem = tipoViagem;
@@ -26,11 +26,11 @@ public class Viagem {
         this.quantidadeDePessoas = quantidadeDePessoas;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
